@@ -21,3 +21,8 @@
 
 .card-img-top {
   width: 100%; }
+
+a, a:hover, a:focus {
+  color: white;
+  text-decoration: none;
+}
