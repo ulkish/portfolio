@@ -17,6 +17,7 @@ app.use('/src', express.static(path.join(__dirname, 'src')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// RUTAS
 app.get("/", (req, res) => {
   res.render("index");
 });
@@ -33,30 +34,29 @@ app.post('/send', (req, res) => {
     <h3>Mensaje</h3>
     <p>${req.body.message}</p>
   `;
-  // create reusable transporter object using the default SMTP transport
+// Setup de Nodemailer
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     port: 587,
-    secure: false, // true for 465, false for other ports
+    secure: false,
     auth: {
       user: 'hugonodemailer@gmail.com',
-      pass: 'inrainbows' // generated ethereal password
+      pass: 'inrainbows'
     },
     tls: {
         rejectUnauthorized: false
     }
   });
 
-  // setup email data with unicode symbols
+  
   let mailOptions = {
-    from: '"Mensaje desde portfolio!" <hugonodemailer@gmail.com>', // sender address
-    to: 'dev.hugomoran@gmail.com, vantheldriel@gmail.com', // list of receivers
-    subject: 'Has sido contactado!', // Subject line
-    text: 'Hello world?', // plain text body
-    html: output // html body
+    from: '"Mensaje desde portfolio!" <hugonodemailer@gmail.com>',
+    to: 'dev.hugomoran@gmail.com, vantheldriel@gmail.com',
+    subject: 'Has sido contactado!', 
+    text: 'Hello world?',
+    html: output
   };
 
-  // send mail with defined transport object
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       return console.log(error);
@@ -64,15 +64,14 @@ app.post('/send', (req, res) => {
     console.log('Message sent: %s', info.messageId);
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-    res.render('index', {msg:'Tu mensaje ha sido enviado!'})
+    res.render('index', {msg:'Tu mensaje ha sido enviado! Muchas gracias.'})
 
   });
 });
 
-app.listen(process.env.PORT, process.env.IP, function() {
-        console.log("Server is running!");
-});
+//app.listen(process.env.PORT, process.env.IP, function() {
+//      console.log("Server is running!");
+//});
 
 
-
-// app.listen(3000, () => console.log("Server ir running!"));
+app.listen(3000, () => console.log("Server ir running!"));
