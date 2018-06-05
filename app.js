@@ -36,12 +36,12 @@ app.post('/send', (req, res) => {
   `;
 // Setup de Nodemailer
   let transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: // REDACTADO,
     port: 587,
     secure: false,
     auth: {
-      user: 'hugonodemailer@gmail.com',
-      pass: 'inrainbows'
+      user: // REDACTADO
+      pass: // REDACTADO
     },
     tls: {
         rejectUnauthorized: false
@@ -50,8 +50,8 @@ app.post('/send', (req, res) => {
 
   
   let mailOptions = {
-    from: '"Mensaje desde portfolio!" <hugonodemailer@gmail.com>',
-    to: 'dev.hugomoran@gmail.com, vantheldriel@gmail.com',
+    from: '"Mensaje desde portfolio!"',
+    to: // REDACTADO
     subject: 'Has sido contactado!', 
     text: 'Hello world?',
     html: output
